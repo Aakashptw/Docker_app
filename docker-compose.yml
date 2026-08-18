@@ -1,0 +1,29 @@
+version: "3.7"
+
+services:
+  app:
+    build: .
+    ports:
+      - "8080:8080"
+    networks:
+      - a-network
+
+  postgres:
+    image: postgres:latest
+    environment:
+      POSTGRES_USER: aakash
+      POSTGRES_PASSWORD: 1234
+      POSTGRES_DB: aaksh
+    ports:
+      - 5432:5433
+    networks:
+      - a-network
+    volumes:
+      - postgres-a-data:var/lib/postgresql/data
+
+networks:
+  a-network:
+    driver: bridge
+
+volumes:
+  postgres-a-data:
